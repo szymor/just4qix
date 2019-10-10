@@ -6,7 +6,7 @@
 #define numSoundEffects 7
 
 enum musicTrack { menu, game1, game2, game3, game4, gameOver, game5, game6, game7, game8 };
-char* musicFiles[numMusicTracks] = { "sound/alf_-_no-mercy.mod", "sound/beyond_music.mod", "sound/spacedeb.mod", "sound/enigma.mod", "sound/stardstm.mod", "sound/elysium.mod","sound/2unlimit.mod","sound/cream_of_the_earth.mod","sound/aurora.mod","sound/annamull.mod"};
+char* musicFiles[numMusicTracks] = { "sound/alf_-_no-mercy.ogg", "sound/beyond_music.ogg", "sound/spacedeb.ogg", "sound/enigma.ogg", "sound/stardstm.ogg", "sound/elysium.ogg","sound/2unlimit.ogg","sound/cream_of_the_earth.ogg","sound/aurora.ogg","sound/annamull.ogg"};
 
 Mix_Music* Music;  //only ever one music track playing at a time, load them as we need them
 
@@ -23,7 +23,7 @@ bool InitSound(){
   int audio_channels = 2;
   int audio_buffers = 1024;
 
-  SDL_Init(SDL_INIT_AUDIO);	
+  SDL_Init(SDL_INIT_AUDIO);
 	
    if(Mix_OpenAudio(audio_rate, audio_format, audio_channels, audio_buffers)) {
     printf("Unable to open audio!\n");
