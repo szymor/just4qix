@@ -9,3 +9,7 @@ bool InitVideo();
 bool InitGfx();
 void Render();
 void CleanUpVideo();
+void RenderMenu();
+void RenderStart();
+void RenderLevelOver();
+void RenderGameOver();

@@ -4,7 +4,7 @@
 #include "update.h"
 #include "input.h"
 #include "menu.h"
-
+#include "sound.h"
 
 int FRAMES_PER_SECOND=60;
 int GameState = GAME_INIT;

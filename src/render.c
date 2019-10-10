@@ -305,8 +305,8 @@ void RenderGameOver(){
 
 void renderHenchmen()
 {
-	static henchFrame=0;
-	static timer = 0 ;
+	static int henchFrame = 0;
+	static int timer = 0 ;
 	if (SDL_GetTicks()>timer) { 
 		henchFrame = (henchFrame +1) % 33;
 		timer = SDL_GetTicks()+50;
@@ -332,8 +332,8 @@ void renderHenchmen()
 
 void DrawBoss(int bossx, int bossy)
 {
-	static bossFrame=0;
-	static timer = 0 ;
+	static int bossFrame = 0;
+	static int timer = 0 ;
 	if (SDL_GetTicks()>timer) { 
 		bossFrame = (bossFrame +1) % 16;
 		timer = SDL_GetTicks()+50;
@@ -356,9 +356,9 @@ void DrawBoss(int bossx, int bossy)
 
 void DrawPlayer(int x, int y)
 {
-	static fade=0;
-	static playerFrame=0;
-	static timer = 0 ;
+	static int fade = 0;
+	static int playerFrame = 0;
+	static int timer = 0 ;
 	if (SDL_GetTicks()>timer) { 
 		playerFrame = (playerFrame +1) % 16;
 		timer = SDL_GetTicks()+playerAnimSpeed;
@@ -423,7 +423,7 @@ bool InitVideo(){
 	if(SDL_Init(SDL_INIT_VIDEO) < 0) {
 		return false;
 	}
-	ScreenSurface = SDL_SetVideoMode(320, 480, 16, SDL_HWSURFACE);
+	ScreenSurface = SDL_SetVideoMode(320, 240, 16, SDL_HWSURFACE);
 	if((Surf_Display = SDL_CreateRGBSurface(SDL_SWSURFACE, 320, 240, 16, 0, 0, 0, 0)) == NULL) {
 		return false;
 	}

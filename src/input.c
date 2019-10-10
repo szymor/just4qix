@@ -6,7 +6,7 @@
 #include "input.h"
 
 
-extern GameState;
+extern int GameState;
 bool CLEFT;
 bool CRIGHT;
 bool CDOWN;

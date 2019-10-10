@@ -6,6 +6,7 @@ the game world knows nothing about rendering or bitmaps
 #include "misc.h"
 #include "render.h"
 #include "particle.h"
+#include "sound.h"
 
 #define Maxhenchmen 8
 
@@ -76,8 +77,6 @@ int stackPointer;
 
 bool menu_on = true;
 
-
-
 void UpdateStart(){
 	int sx,sy,sw,sh;
 	
@@ -108,13 +107,7 @@ void UpdateStart(){
 
 
 void UpdateMenu(){
-	
-	
-	
-	
-	
-		
-	static keydelay = 0;
+	static int keydelay = 0;
 	if (CQUIT) {
 		GameState=GAME_EXIT; 
 		return;
@@ -268,13 +261,13 @@ Uint32 floodFillScanlineStack(int x, int y, Uint16 newColor, Uint16 oldColor)
     Uint32 fillcount=0;
     int w=320;
     int h=240;	
-    if(oldColor == newColor) return;
+    if(oldColor == newColor) return 0;
     emptyStack();
     pixels = (Uint16 *)Surf_Reveal->pixels; 
     int y1; 
     bool spanLeft, spanRight;
     
-    if(!push(x, y)) return;
+    if(!push(x, y)) return 0;
     
     while(pop(&x, &y))
     {    
@@ -288,7 +281,7 @@ Uint32 floodFillScanlineStack(int x, int y, Uint16 newColor, Uint16 oldColor)
 	     ++fillcount;		
             if(!spanLeft && x > 0 && get_pixel16(x-1,y1) == oldColor) 
             {
-                if(!push(x - 1, y1)) return;
+                if(!push(x - 1, y1)) return 0;
                 spanLeft = 1;
             }
             else if(spanLeft && x > 0 && get_pixel16(x-1,y1) != oldColor)
@@ -297,7 +290,7 @@ Uint32 floodFillScanlineStack(int x, int y, Uint16 newColor, Uint16 oldColor)
             }
             if(!spanRight && x < w - 1 && get_pixel16(x+1,y1) == oldColor) 
             {
-                if(!push(x + 1, y1)) return;
+                if(!push(x + 1, y1)) return 0;
                 spanRight = 1;
             }
             else if(spanRight && x < w - 1 && get_pixel16(x+1,y1) != oldColor)
@@ -398,8 +391,8 @@ void updatePlayer(){
 }
 
 void updateLevelOver(){
-	static timer=0;
-	static float backdy=0.5;
+	static int timer = 0;
+	static float backdy = 0.5;
 	if ((backy + backdy) < 0 |  (backy + screen_height+ backdy) >  Surf_Background->h) { backdy = -backdy;}
 	backy += backdy;
 	if (CQUIT) {
@@ -547,7 +540,7 @@ void updateBoss() {
 
 void update( ) { //main update loop
 	
-	static quartersecTimer =0;
+	static int quartersecTimer = 0;
 	if (CQUIT) { GameState = GAME_MENU; CQUIT=false; StopMusic(); PlayIntroMusic();return;}	
 	updatePlayer();
 	updateBoss();
